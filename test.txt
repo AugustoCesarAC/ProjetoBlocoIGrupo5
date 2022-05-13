@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 teste do teste
 
 outra linha
@@ -6,3 +6,5 @@ outra linha
 mais uma linhaaaaaaa
 
 minha linha
+
++lojaRpg
