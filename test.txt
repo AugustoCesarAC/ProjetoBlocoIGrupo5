@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+teste do teste
 
+outra linha
+
+mais uma linhaaaaaaa
 
 minha linha
