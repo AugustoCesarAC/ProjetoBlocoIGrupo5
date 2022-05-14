@@ -1,16 +1,16 @@
 package LojaRPG;
 
-import LojaRPG.Lojas.LojaGeral;
-
 public class DiaaDia
 {
 
 	public static void main(String[] args)
 	{
-		LojaGeral loja = new LojaGeral();
+		Item criar = new Item();
 		
-		loja.catalogoLoja();
-
+		criar.criarItemLoja();
+		System.out.println("=========================================================");
+		criar.criarItemClient();
+		
 	}
 
 }

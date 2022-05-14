@@ -15,4 +15,6 @@ public class Cliente extends Pessoa
 		this.CRF = rand.nextInt(100000,999999);
 	}
 	
+	
+	
 }
