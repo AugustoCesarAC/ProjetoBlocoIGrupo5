@@ -5,13 +5,48 @@ import LojaRPG.Item;
 public class Pessoa
 {
 	
-	public String nome;
-	public String raca[] = {"Elfo","Anão","Humano","Demonio"};
+	private String nome;
+	private String raca;
+	//private String raca[] = {"Elfo","Anï¿½o","Humano","Demonio"};
 	//public String classe[] = {"Barbaro","Arqueiro","Mago"};
-	public Item item;
+	private Item item;
 	
 	//METODO CONSTRUTOR
+	public Pessoa() {
+		
+	}
 	
+	public Pessoa(String nome, String raca) {
+		this.nome = nome;
+		this.raca = raca;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getRaca() {
+		return raca;
+	}
+
+
+	public void setRaca(String raca) {
+		this.raca = raca;
+	}
+
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
 	public void charNome()
 	{
 		

@@ -13,4 +13,5 @@ public interface Loja
 	
 	public abstract void catalogoLoja();
 	
+	
 }
