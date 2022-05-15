@@ -88,7 +88,7 @@ public class Funcionario extends Pessoa{
 			if(nmr==funcionarios.size()+1) {// 4
 				System.out.println("\nLista de todos os Funcionários na nossa Loja: \n");
 				for(Funcionario func : funcionarios) {
-					System.out.println(func.verificar());
+					System.out.println(func.status());
 				}
 
 				System.out.println();
@@ -180,15 +180,11 @@ public class Funcionario extends Pessoa{
 		this.cargo = cargo;
 	}
 	
-	public String status() {
-		return "Nome: "+getNome()+", Raça: "+getRaca()+", Cargo: "+getCargo()+", Salário: "+getSalario();
-	}
-	
 	public String toString() {
 		return "Nome: "+getNome()+", Raça: "+getRaca()+", Cargo: "+getCargo();
 	}
 	
-	public String verificar() {
+	public String status() {
 		return "Cod: "+getCod()+", Nome: "+getNome()+", Cargo: "+getCargo()+", isDisp: "+isDisp();
 	}
 	
