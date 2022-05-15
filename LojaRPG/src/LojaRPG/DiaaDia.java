@@ -8,14 +8,15 @@ public class DiaaDia
 	{
 		
 		
+	
 		
-		/*
-		int nmr;
-		nmr = Funcionario.menu();        
-		System.out.println(nmr);
-		ir até a linha 87 da classe funcionario e altera o valor da variavel nmr
+		
+		Funcionario.menu();  
 
-		*/
+		
+		// ir até a linha 87 da classe funcionario e altera o valor da variavel nmr
+
+	
 
 
 	}

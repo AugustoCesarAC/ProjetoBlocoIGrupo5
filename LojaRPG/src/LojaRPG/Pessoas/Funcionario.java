@@ -12,8 +12,8 @@ public class Funcionario extends Pessoa{
 	private boolean disp; // se está disponível para atender o cliente
 	
 	public Funcionario() {
-		numberInstances++;
 		cod = numberInstances;
+		numberInstances++;
 	}
 
 	public String definirSalarioComCargo(String cargo) {
@@ -28,64 +28,128 @@ public class Funcionario extends Pessoa{
 	
 	public static int menu() {
 		
+		
+		// eu nao sei se é melhor deixar tudo no metodo main ou aqui.
+		//se for passar pelo metodo main pode passar o codigo da linha 35 até a 151
+		
 		ArrayList<Funcionario> funcionarios = new ArrayList<>();
 		Scanner sc = new Scanner(System.in);
-		int nmr=0;
+		int nmr=-1;
+		boolean funcNaoDisp = false;
+		
+		Funcionario funcionario = new Funcionario();
+		funcionario.setNome("Joao");
+		funcionario.setRaca("Elfo");
+		funcionario.setCargo("Gerente");
+		funcionario.setDisp(false);
+		funcionario.definirSalarioComCargo(funcionario.getCargo());
 		
 		Funcionario funcionario1 = new Funcionario();
-		funcionario1.setNome("Joao");
-		funcionario1.setRaca("Elfo");
-		funcionario1.setCargo("Gerente");
-		funcionario1.setDisp(false);
+		funcionario1.setNome("Rebecca");
+		funcionario1.setRaca("Demonio");
+		funcionario1.setCargo("Analista");
+		funcionario1.setDisp(true);
 		funcionario1.definirSalarioComCargo(funcionario1.getCargo());
 		
 		Funcionario funcionario2 = new Funcionario();
-		funcionario2.setNome("Rebecca");
-		funcionario2.setRaca("Demonio");
-		funcionario2.setCargo("Analista");
+		funcionario2.setNome("Rogerio");
+		funcionario2.setRaca("Humano");
+		funcionario2.setCargo("Vendedor");
 		funcionario2.setDisp(true);
 		funcionario2.definirSalarioComCargo(funcionario2.getCargo());
 		
 		Funcionario funcionario3 = new Funcionario();
-		funcionario3.setNome("Tadeu");
-		funcionario3.setRaca("Humano");
+		funcionario3.setNome("Julia");
+		funcionario3.setRaca("Elfo");
 		funcionario3.setCargo("Vendedor");
 		funcionario3.setDisp(true);
 		funcionario3.definirSalarioComCargo(funcionario3.getCargo());
 	
+		funcionarios.add(funcionario);
 		funcionarios.add(funcionario1);
 		funcionarios.add(funcionario2);
 		funcionarios.add(funcionario3);
-		
-		do
-		{
+	
+		while(nmr < 0 || nmr > 5) {
 		
 			System.out.println("\nOlá \"nome do cliente\" você deseja ser atendido por qual funcionário? ");
 			System.out.println("Temos os seguintes funcionários disponíveis: \n");
 			
 			for(int i = 0; i<funcionarios.size();i++) {
 				if(funcionarios.get(i).isDisp())
-					System.out.println(i+1+" - " + funcionarios.get(i));
+					System.out.println(i+" - " + funcionarios.get(i));
 			}
-		
-			System.out.println();
-			System.out.println(funcionarios.size()+1+" - Para ver maiores informações sobre os funcionários.");
+			
+			System.out.println(funcionarios.size()+" - Sair");
+			System.out.println(funcionarios.size()+1+" - Para ver maiores informações sobre os funcionários.\n");
 			nmr = sc.nextInt();
 			
-			if(nmr==funcionarios.size()+1) {
+			// só vai executar se escolher a opçao 4, listar todos funcionarios
+			if(nmr==funcionarios.size()+1) {// 4
 				System.out.println("\nLista de todos os Funcionários na nossa Loja: \n");
 				for(Funcionario func : funcionarios) {
-					System.out.println(func.status());
+					System.out.println(func.verificar());
+				}
+
+				System.out.println();
+				
+				System.out.println("Temos os seguintes funcionários disponíveis: \n");
+				
+				for(int i = 0; i<funcionarios.size();i++) {
+					if(funcionarios.get(i).isDisp())
+						System.out.println(i+" - " + funcionarios.get(i));
+				}
+				
+				nmr = sc.nextInt();
+				
+				while(nmr < 0 || nmr >= funcionarios.size()) {
+					System.out.println("Informe um número válido!!");
+
+					System.out.println("Temos os seguintes funcionários disponíveis: \n");
+					
+					for(int i = 0; i<funcionarios.size();i++) {
+						if(funcionarios.get(i).isDisp())
+							System.out.println(i+" - " + funcionarios.get(i));
+					}
+					
+					nmr = sc.nextInt();
+				}
+			
+			}
+			
+			for(int i =0; i<funcionarios.size(); i++) {
+				if(nmr == funcionarios.get(i).getCod() && funcionarios.get(i).isDisp() == false) {
+					System.out.println("Funcionário não disponível no momento!!");
+					funcNaoDisp = true;
 				}
 			}
+			
+			if(funcNaoDisp) {
+				System.out.println("Informe um número válido!!");
+
+				System.out.println("Temos os seguintes funcionários disponíveis: \n");
+				
+				for(int i = 0; i<funcionarios.size();i++) {
+					if(funcionarios.get(i).isDisp())
+						System.out.println(i+" - " + funcionarios.get(i));
+				}
+				
+				nmr = sc.nextInt();
+			}
+			
+			for(int i = 0; i<funcionarios.size();i++) {
+				if(nmr == funcionarios.get(i).getCod() && funcionarios.get(i).isDisp()) {
+					System.out.println("Bem vindo a loja de Espadas.");
+					System.out.println("Eu sou "+funcionarios.get(i).getNome()+", me diga como posso ajudá-lo: ");
+				}
+			}
+			
+			
+		}
 		
-			System.out.println("1 - para voltar a tela anterior\n0 - para sair do programa");
-			nmr = sc.nextInt();
-	
-		}while(nmr != 0);
 		sc.close();
-		nmr = 0;
 		return nmr;
+		
 	}
 	
 	public boolean isDisp() {
@@ -122,7 +186,10 @@ public class Funcionario extends Pessoa{
 	
 	public String toString() {
 		return "Nome: "+getNome()+", Raça: "+getRaca()+", Cargo: "+getCargo();
-		
+	}
+	
+	public String verificar() {
+		return "Cod: "+getCod()+", Nome: "+getNome()+", Cargo: "+getCargo()+", isDisp: "+isDisp();
 	}
 	
 }
