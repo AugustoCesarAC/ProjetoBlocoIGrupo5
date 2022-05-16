@@ -7,7 +7,7 @@ public class Cliente extends Pessoa
 
 	Random rand = new Random();
 	
-	public int CRF;//CPF DE RA«A
+	public int CRF;//CPF DE RAÁA
 	public double carteira;//SALDO DINHEIRO
 	
 	public void geradorCRF()

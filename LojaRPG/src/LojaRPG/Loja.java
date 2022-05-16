@@ -3,7 +3,8 @@ package LojaRPG;
 public interface Loja
 {
 
-	public abstract void comprar();
+	public abstract void comprar(Item item);
+//	public abstract void comprar();
 	
 	public abstract void vender();
 	

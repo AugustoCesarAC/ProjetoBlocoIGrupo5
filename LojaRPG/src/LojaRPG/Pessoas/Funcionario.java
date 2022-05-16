@@ -5,7 +5,7 @@ public class Funcionario extends Pessoa
 	
 	private int cod;
 	private static int numberInstances;
-	private double salario;//GANHA P√O
+	private double salario;//GANHA P„O
 	private boolean chave = false;//ACESSAR A LOJA
 	private String cargo;
 

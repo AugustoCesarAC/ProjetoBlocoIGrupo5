@@ -1,5 +1,7 @@
 package LojaRPG.Lojas;
 
+import LojaRPG.Item;
+
 public class LojaEspada extends LojaGeral
 {
 
@@ -9,7 +11,7 @@ public class LojaEspada extends LojaGeral
 	}
 	
 	@Override
-	public void comprar() {
+	public void comprar(Item item) {
 		
 	}
 

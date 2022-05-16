@@ -7,7 +7,7 @@ public class Pessoa
 	
 	private String nome;
 	private String raca;
-	//private String raca[] = {"Elfo","An�o","Humano","Demonio"};
+	//private String raca[] = {"Elfo","Anão","Humano","Demonio"};
 	//public String classe[] = {"Barbaro","Arqueiro","Mago"};
 	private Item item;
 	

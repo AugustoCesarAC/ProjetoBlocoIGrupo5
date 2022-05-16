@@ -6,12 +6,14 @@ import LojaRPG.Lojas.LojaArco;
 import LojaRPG.Lojas.LojaEspada;
 import LojaRPG.Lojas.LojaGeral;
 import LojaRPG.Lojas.LojaPocao;
+import LojaRPG.Lojas.LojaVariedades;
 import LojaRPG.Pessoas.Pessoa;
 
 public class Programa {
 
 	private static Scanner scan = new Scanner(System.in);
-
+	public static Pessoa personagem = null;
+	public static LojaGeral loja = null;
 	public void menu() throws Exception {
 		fraseIntrodutoria();
 		String condicao = " ";
@@ -58,7 +60,7 @@ public class Programa {
 
 	public void iniciarJogo() {
 		System.out.println("Iniciando jogo!");
-		criarPersonagem();
+//		criarPersonagem();
 		String condicao = " ";
 		do {
 			
@@ -83,10 +85,8 @@ public class Programa {
 //				limpatela();
 				System.out.println("criar Personagem***");
 				criarPersonagem();
-				LojaGeral lojinha = escolhaLoja();
-				if (lojinha == null)// por garantia momentânea
-					return;
-				lojinha.menuLoja();
+				escolhaLoja();
+				Programa.loja.menuLoja();
 //				limpatela();
 				break;
 			case "2":
@@ -99,29 +99,14 @@ public class Programa {
 
 			}
 
-			
-			switch (condicao) {
-			case "":
-				LojaGeral lojinha = escolhaLoja();
-				if (lojinha == null)
-					return;
-				lojinha.menuLoja();
-				break;
-
-			default:
-				break;
-			}
-			
-		}while(condicao.equals("0"));
+		}while(!condicao.equals("0"));
 
 	}
 	
-	private Pessoa criarPersonagem() {
+	private void criarPersonagem() {
 //		String racaPersonagem = menuRacaPersonagem();
 //		String classePersonagem = menuClassepersonagem();
-//		
-		Pessoa personagem = new Pessoa(menuRacaPersonagem(), menuClassepersonagem());
-		return personagem;
+		Programa.personagem =  new Pessoa(menuRacaPersonagem(), menuClassepersonagem());
 	}
 
 	private String menuRacaPersonagem() {
@@ -156,6 +141,7 @@ public class Programa {
 				System.out.println("Minotauro***");
 				racaPersonagem = "Minotauro";
 				condicao = "0";
+				minotauroArt();
 				break;
 			case "4":
 				System.out.println("Gnomo***");
@@ -177,6 +163,20 @@ public class Programa {
 		return racaPersonagem;
 	}
 
+	private void minotauroArt() {
+		System.out.println("<=======]}======\r\n"
+				+ "    --.   /|\r\n"
+				+ "   _\\\"/_.'/\r\n"
+				+ " .'._._,.'\r\n"
+				+ " :/ \\{}/\r\n"
+				+ "(L  /--',----._\r\n"
+				+ "    |          \\\\\r\n"
+				+ "   : /-\\ .'-'\\ / |\r\n"
+				+ "snd \\\\, ||    \\|\r\n"
+				+ "     \\/ ||    ||");
+		
+	}
+
 	private String menuClassepersonagem() {
 
 		String classePersonagem = " ";
@@ -194,7 +194,6 @@ public class Programa {
 			sb.append("\n  =========================");
 			sb.append("\n Opcão --> ");
 			System.out.println(sb);
-			System.out.print("Opcão --> ");
 			condicao = scan.next();
 
 			switch (condicao) {
@@ -237,9 +236,8 @@ public class Programa {
 		return classePersonagem;
 	}
 
-	private LojaGeral escolhaLoja() {
+	private void escolhaLoja() {
 		String condicao = " ";
-		LojaGeral lojaEscolhida = null;
 		do {
 
 			StringBuilder sb = new StringBuilder();
@@ -248,7 +246,7 @@ public class Programa {
 			sb.append("\n |     1 - Loja de Poções         |");
 			sb.append("\n |     2 - Loja de Espadas           |");
 			sb.append("\n |     3 - Loja de Arco e Flechas        |");
-//			sb.append("\n |     0 - voltar        |");
+			sb.append("\n |     4 - Loja variedade        |");
 			sb.append("\n  =========================");
 			sb.append("\nOpcão --> ");
 			System.out.println(sb);
@@ -257,17 +255,22 @@ public class Programa {
 			switch (condicao) {
 			case "1":
 				System.out.println("Loja de poções***");
-				lojaEscolhida = new LojaPocao();
+				Programa.loja = new LojaPocao();
 				condicao = "0";
 				break;
 			case "2":
 				System.out.println("Loja de Espadas***");
-				lojaEscolhida = new LojaEspada();
+				Programa.loja = new LojaEspada();
 				condicao = "0";
 				break;
 			case "3":
 				System.out.println("Loja de Arco e Flecha***");
-				lojaEscolhida = new LojaArco();
+				Programa.loja = new LojaArco();
+				condicao = "0";
+				break;
+			case "4":
+				System.out.println("Loja variedades***");
+				Programa.loja = new LojaVariedades();
 				condicao = "0";
 				break;
 
@@ -277,7 +280,6 @@ public class Programa {
 			}
 		} while (!condicao.equals("0"));
 
-		return lojaEscolhida;
 	}
 
 	private static void infoCriadores() {
@@ -306,7 +308,6 @@ public class Programa {
 		for (int i = 0; i < fraseInicial.length(); i++) {
 			System.out.print(fraseInicial.charAt(i));
 			// Thread.sleep(5);//usar 5
-
 		}
 	}
 
