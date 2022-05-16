@@ -1,5 +1,7 @@
 package LojaRPG;
 
+import java.util.List;
+
 import LojaRPG.Lojas.LojaGeral;
 import LojaRPG.Pessoas.Pessoa;
 
@@ -12,6 +14,8 @@ public interface Transacoes
 	void vender(LojaGeral comprador, Pessoa vendedor);
 	
 	void adicionar();
+	
+	void adicionar(List<Item> listaItens);
 	
 	void remover();
 	

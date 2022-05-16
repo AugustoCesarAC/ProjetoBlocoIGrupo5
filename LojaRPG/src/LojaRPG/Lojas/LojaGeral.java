@@ -17,7 +17,6 @@ public  class LojaGeral implements Transacoes {
 	protected LojaRepo repositorio; // ESTOQUE DA LOJA
 
 	public void menuLoja() {
-//		this.repositorio
 	}
 
 	public void catalogo(String tipo) {
@@ -56,6 +55,12 @@ public  class LojaGeral implements Transacoes {
 
 	@Override
 	public void listarItens() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void adicionar(List<Item> listaItens) {
 		// TODO Auto-generated method stub
 		
 	}

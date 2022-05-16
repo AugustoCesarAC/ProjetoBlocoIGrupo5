@@ -170,7 +170,10 @@ public class LojaRepo extends LojaGeral {
 
 	@Override
 	public void listarItens() {
-		// TODO Auto-generated method stub
+		int n = 0;
+		for (Item item : produtos) {
+			System.out.println(n + ":" + item.getNome() + " " + item.getPlus());
+		}
 		
 	}
 

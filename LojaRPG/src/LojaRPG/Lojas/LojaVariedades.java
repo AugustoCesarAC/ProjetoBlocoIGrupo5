@@ -12,7 +12,7 @@ import LojaRPG.Pessoas.Pessoa;
 
 public class LojaVariedades extends LojaGeral {
 	private static Scanner scan = new Scanner(System.in);
-//	private LojaRepo repositorio = new LojaRepo();
+	private LojaRepo repositorio = new LojaRepo();
 
 	public LojaVariedades() {
 
@@ -148,7 +148,7 @@ public class LojaVariedades extends LojaGeral {
 
 	@Override
 	public void remover() {
-		// TODO Auto-generated method stub
+		repositorio.comprar(null);
 		
 	}
 
