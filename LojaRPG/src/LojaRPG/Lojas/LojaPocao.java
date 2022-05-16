@@ -12,6 +12,7 @@ import LojaRPG.Pessoas.Pessoa;
 public class LojaPocao extends LojaGeral {
 
 	public static Scanner scan = new Scanner(System.in);
+	private LojaRepo repositorio = new LojaRepo();
 	@Override
 	public void menuLoja() {
 
