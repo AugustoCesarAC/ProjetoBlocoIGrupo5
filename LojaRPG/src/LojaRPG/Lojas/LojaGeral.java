@@ -1,5 +1,6 @@
 package LojaRPG.Lojas;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import LojaRPG.Item;
@@ -9,30 +10,23 @@ public class LojaGeral implements Loja
 {
 
 	Random rand = new Random();
+	Item item = new Item();
 	
 	private double caixaLoja;// DINHEIRO NO CAIXA
-	private int espacoLoja;// TAMANHO A DEFINIR DA LOJA
-	private int metroQuadro[];// METRO QUADRADO DA LOJA
 	private Item produto[];//PRODUTOS DIVERSOS
 	private double especimeCobre;//A MOEDA DO LOCAL
-	private double valorItem;
+	
 	
 	//METODO CONSTRUTOR
 	public LojaGeral()
 	{
 		this.caixaLoja = 2000.50;
 	}
-	
-	public double valorItem()
-	{
-		this.valorItem  = rand.nextDouble(10,51);
-		return valorItem;
-	}
 
 	@Override
 	public void comprar()
 	{
-		// TODO Auto-generated method stub
+		
 		
 	}
 
