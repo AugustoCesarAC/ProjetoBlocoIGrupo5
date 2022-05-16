@@ -7,13 +7,16 @@ import LojaRPG.Lojas.LojaEspada;
 import LojaRPG.Lojas.LojaGeral;
 import LojaRPG.Lojas.LojaPocao;
 import LojaRPG.Lojas.LojaVariedades;
+import LojaRPG.Pessoas.Funcionario;
 import LojaRPG.Pessoas.Pessoa;
 
 public class Programa {
 
 	private static Scanner scan = new Scanner(System.in);
-	public static Pessoa personagem = null;
-	public static LojaGeral loja = null;
+	public static Pessoa personagem = new Pessoa("Personagem Genérico", "Raça Genérica");
+	public static Funcionario funcionario = new Funcionario("Funcionário Genérico", "Elfo", "Gerente");
+	public static LojaGeral loja;
+
 	public void menu() throws Exception {
 		fraseIntrodutoria();
 		String condicao = " ";
@@ -58,17 +61,18 @@ public class Programa {
 		} while (!condicao.equals("0"));
 	}
 
-	public void iniciarJogo() {
+	public void iniciarJogo() throws Exception {
 		System.out.println("Iniciando jogo!");
 //		criarPersonagem();
 		String condicao = " ";
 		do {
-			
+
 			StringBuilder sb = new StringBuilder();
 			sb.append("\n  =========================");
 			sb.append("\n |                         |");
 			sb.append("\n |    1 - Criar personagem |");
-			sb.append("\n |     2 - Gerenciar Loja |");
+//			sb.append("\n |     2 - Escolher vendedor |");
+			sb.append("\n |     3 - Visitar Lojas |");
 			sb.append("\n |     0 - Encerrar        |");
 			sb.append("\n=========================");
 			sb.append("\nOpcão --> ");
@@ -89,9 +93,15 @@ public class Programa {
 				Programa.loja.menuLoja();
 //				limpatela();
 				break;
-			case "2":
-				System.out.println("Escolha um funcionario: ");
-//				escolhaFuncionario();
+//			case "2":
+//				System.out.println("Escolha um funcionario: ");
+//				menuFuncionario();
+////				escolhaFuncionario();
+//				break;
+			case "3":
+				System.out.println("Visitando Lojas***");
+				escolhaLoja();
+				Programa.loja.menuLoja();
 				break;
 			default:
 				System.out.println("Opção inválida! Tente novamente.");
@@ -99,14 +109,55 @@ public class Programa {
 
 			}
 
-		}while(!condicao.equals("0"));
+		} while (!condicao.equals("0"));
 
 	}
-	
+
+	public static void menuFuncionario() {
+
+		String condicao = " ";
+		do {
+			StringBuilder sb = new StringBuilder();
+			sb.append("\n  =========================");
+			sb.append("\n |                         |");
+			sb.append("\n |     1 - João, O Goblin         |");
+			sb.append("\n |     2 - Rebecca, A Elfa           |");
+			sb.append("\n |     3 - Rogerio, Humano        |");
+//			sb.append("\n |     0 - sair        |");
+			sb.append("\n Opcão --> ");
+			System.out.println(sb);
+			condicao = scan.next();
+
+			switch (condicao) {
+			case "1":
+				System.out.println("Vendedor***");
+				Programa.funcionario = new Funcionario("Vendedor Genérico", "Raça Genérica", "Vendedor");
+				condicao = "0";
+				break;
+			case "2":
+				System.out.println("Analista***");
+				Programa.funcionario = new Funcionario("Analista Genérico", "Raça Genérica", "Analista");
+				condicao = "0";
+				break;
+			case "3":
+				System.out.println("Gerente***");
+				Programa.funcionario = new Funcionario("Gerente Genérico", "Raça Genérica", "Gerente");
+				condicao = "0";
+				Artes.minotauroArt();
+				break;
+
+			default:
+				System.out.println("Opção inválida! Tente novamente.");
+			}
+
+		} while (!condicao.equals("0"));
+
+	}
+
 	private void criarPersonagem() {
 //		String racaPersonagem = menuRacaPersonagem();
 //		String classePersonagem = menuClassepersonagem();
-		Programa.personagem =  new Pessoa(menuRacaPersonagem(), menuClassepersonagem());
+		Programa.personagem = new Pessoa(menuRacaPersonagem(), menuClassepersonagem());
 	}
 
 	private String menuRacaPersonagem() {
@@ -141,7 +192,7 @@ public class Programa {
 				System.out.println("Minotauro***");
 				racaPersonagem = "Minotauro";
 				condicao = "0";
-				minotauroArt();
+				Artes.minotauroArt();
 				break;
 			case "4":
 				System.out.println("Gnomo***");
@@ -163,19 +214,7 @@ public class Programa {
 		return racaPersonagem;
 	}
 
-	private void minotauroArt() {
-		System.out.println("<=======]}======\r\n"
-				+ "    --.   /|\r\n"
-				+ "   _\\\"/_.'/\r\n"
-				+ " .'._._,.'\r\n"
-				+ " :/ \\{}/\r\n"
-				+ "(L  /--',----._\r\n"
-				+ "    |          \\\\\r\n"
-				+ "   : /-\\ .'-'\\ / |\r\n"
-				+ "snd \\\\, ||    \\|\r\n"
-				+ "     \\/ ||    ||");
-		
-	}
+	
 
 	private String menuClassepersonagem() {
 
@@ -286,10 +325,12 @@ public class Programa {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Augusto");
 		sb.append("\nCamilla");
-		sb.append("\nEdgar");
+		sb.append("\nEdgard");
 		sb.append("\nHenrique");
 		sb.append("\nJonathan");
 		sb.append("\nVitória");
+		sb.append("\nRenan");
+		sb.append("\nRenan novamente");
 		System.out.println(sb);
 	}
 
@@ -304,10 +345,9 @@ public class Programa {
 				+ "\n tempestades violentas, um grupo de amigos do ensino médio começa a achar que o Ragnarök,"
 				+ "\n sequência de eventos que levariam ao apocalipse de acordo com a mitologia nórdica,"
 				+ "\n está mais próximo do que eles imaginam.";
-		int pulaLinha = 10;
 		for (int i = 0; i < fraseInicial.length(); i++) {
 			System.out.print(fraseInicial.charAt(i));
-			// Thread.sleep(5);//usar 5
+//			Thread.sleep(5);// usar 5
 		}
 	}
 

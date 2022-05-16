@@ -1,63 +1,72 @@
 package LojaRPG.Pessoas;
 
-public class Funcionario extends Pessoa
-{
-	
-	private int cod;
+public class Funcionario extends Pessoa {
+
+//	private int cod;
 	private static int numberInstances;
-	private double salario;//GANHA P„O
-	private boolean chave = false;//ACESSAR A LOJA
+	private double salario;// GANHA P„O
+	private boolean chave = false;// ACESSAR A LOJA
 	private String cargo;
 
 	public Funcionario() {
 		numberInstances++;
-		cod = numberInstances;
+//		cod = numberInstances;
+	}
+
+	public Funcionario(String nome, String raca, String cargo) {
+		super(nome, raca);
+		numberInstances++;
+//		cod = numberInstances;
+		this.cargo = cargo;
+		definirSalarioComCargo(this.cargo);
 	}
 
 	public String definirSalarioComCargo(String cargo) {
-		if(this.cargo.equalsIgnoreCase("Gerente"))
+		if (this.cargo.equalsIgnoreCase("Gerente"))
 			this.salario = 8000;
-		else if(this.cargo.equalsIgnoreCase("Analista"))
+		else if (this.cargo.equalsIgnoreCase("Analista"))
 			this.salario = 5000;
 		else
 			this.salario = 2500;
 		return cargo;
 	}
-	
-	public int getCod() { 
-		return cod;
-	}
-	
+
+//	public int getCod() {
+//		return cod;
+//	}
+
 	public double getSalario() {
 		return salario;
 	}
-	
+
 	public void setSalario(double salario) {
 		this.salario = salario;
 	}
-	
+
 	public boolean isChave() {
 		return chave;
 	}
-	
+
 	public void setChave(boolean chave) {
 		this.chave = chave;
 	}
-	
+
 	public String getCargo() {
 		return cargo;
 	}
-	
+
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	
+
 	public void entrarLoja() {
 		this.chave = true;
 	}
-	
-	public void status() {
-		System.out.println(getCod()+"\n"+getNome()+"\n"+getRaca()+"\n"+getSalario()+"\n"+getCargo());
+
+	public String status() {
+		return /*Cod: " + getCod() +*/ ", Nome: " + getNome() + ", Cargo: " + getCargo() + ", Sal·rio: " + getSalario();
 	}
 	
+	
+
 }
