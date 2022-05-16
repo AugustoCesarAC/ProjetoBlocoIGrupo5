@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 teste vitoria ... aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+=======
+teste do teste
+
+outra linha
+
+mais uma linhaaaaaaa
+>>>>>>> 3118363825cd28110f022c6cf63af4259ed40c26
