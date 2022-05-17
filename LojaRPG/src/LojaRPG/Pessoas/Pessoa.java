@@ -1,59 +1,50 @@
 package LojaRPG.Pessoas;
 
-import LojaRPG.Item;
 
 public class Pessoa
 {
 	
-	private String nome;
-	private String raca;
-	//private String raca[] = {"Elfo","An�o","Humano","Demonio"};
-	//public String classe[] = {"Barbaro","Arqueiro","Mago"};
-	private Item item;
-	
-	//METODO CONSTRUTOR
+	protected String classe;
+	protected String raca;
+	protected String statusSocial;
 
-	
-	public String getNome() {
-		return nome;
+	public Pessoa() {
+		
 	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
+	public Pessoa(String raca){
+		this.raca = raca;
+	}
+	
+	public Pessoa(String raca, String classe) {
+		this.raca = raca;
+		this.classe = classe;
+	}
+	
+	public String getClasse() {
+		return classe;
+	}
+	
+	public void setClasse(String classe) {
+		this.classe = classe;
 	}
 
 	public String getRaca() {
 		return raca;
 	}
 
-
 	public void setRaca(String raca) {
 		this.raca = raca;
 	}
 
-
-	public Item getItem() {
-		return item;
+	public String getStatusSocial() {
+		return statusSocial;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
-	}
-
-	public void charNome()
-	{
-		
+	public void setStatusSocial(String statusSocial) {
+		this.statusSocial = statusSocial;
 	}
 	
-	public void charRaca()
-	{
-		
-	}
-	
-	public void itemRelatorio()
-	{
-		
-	}
 	
 	
 }

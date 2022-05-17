@@ -2,18 +2,17 @@ package LojaRPG;
 
 import java.util.Scanner;
 
-import LojaRPG.Lojas.LojaArco;
-import LojaRPG.Lojas.LojaEspada;
-import LojaRPG.Lojas.LojaGeral;
+import LojaRPG.Lojas.LojaArcoFlecha;
 import LojaRPG.Lojas.LojaPocao;
-//import LojaRPG.Lojas.LojaVariedades;
-import LojaRPG.Pessoas.Pessoa;
+import LojaRPG.Pessoas.Cliente;
+import LojaRPG.Pessoas.Funcionario;
 
 public class Programa {
 
-	private static Scanner scan = new Scanner(System.in);
-	public static Pessoa personagem = null;
-	public static LojaGeral loja = null;
+	Scanner scan = new Scanner(System.in);
+	public Cliente cliente = new Cliente();
+	public Funcionario func = new Funcionario("Deckard Cain", "Human", "Mago", "Analista");
+
 	public void menu() throws Exception {
 		fraseIntrodutoria();
 		String condicao = " ";
@@ -37,17 +36,18 @@ public class Programa {
 
 			case "0":
 				System.out.println("Saindo.....");
+				condicao = "0";
 
 				break;
 			case "1":
-//				limpatela();
 				System.out.println("jogar");
 				iniciarJogo();
-//				limpatela();
+				condicao = "0";
 				break;
 			case "2":
 				System.out.println("Info criadores");
 				infoCriadores();
+				condicao = "0";
 				break;
 			default:
 				System.out.println("Opção inválida! Tente novamente.");
@@ -57,18 +57,16 @@ public class Programa {
 
 		} while (!condicao.equals("0"));
 	}
-
-	public void iniciarJogo() {
+	
+	public void iniciarJogo() throws Exception {
 		System.out.println("Iniciando jogo!");
-//		criarPersonagem();
 		String condicao = " ";
 		do {
-			
+
 			StringBuilder sb = new StringBuilder();
 			sb.append("\n  =========================");
 			sb.append("\n |                         |");
 			sb.append("\n |    1 - Criar personagem |");
-			sb.append("\n |     2 - Gerenciar Loja |");
 			sb.append("\n |     0 - Encerrar        |");
 			sb.append("\n=========================");
 			sb.append("\nOpcão --> ");
@@ -82,34 +80,42 @@ public class Programa {
 				System.out.println("Saindo.....");
 				break;
 			case "1":
-//				limpatela();
-				System.out.println("criar Personagem***");
+				System.out.println("Criar Personagem***");
 				criarPersonagem();
-				escolhaLoja();
-				Programa.loja.menuLoja();
-//				limpatela();
+				escolhaLoja(cliente);
+				condicao = "0";
 				break;
-			case "2":
-				System.out.println("Escolha um funcionario: ");
-//				escolhaFuncionario();
-				break;
+
 			default:
 				System.out.println("Opção inválida! Tente novamente.");
 				break;
 
 			}
 
-		}while(!condicao.equals("0"));
+		} while (!condicao.equals("0"));
 
 	}
 	
+	private static void infoCriadores() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Augusto");
+		sb.append("\nCamilla");
+		sb.append("\nEdgard");
+		sb.append("\nHenrique");
+		sb.append("\nJonathan");
+		sb.append("\nVitória");
+		sb.append("\nRenan");
+		System.out.println(sb);
+	}
+	
 	private void criarPersonagem() {
-//		String racaPersonagem = menuRacaPersonagem();
-//		String classePersonagem = menuClassepersonagem();
-		Programa.personagem =  new Pessoa(menuRacaPersonagem(), menuClassepersonagem());
+		cliente.setRaca(menuRacaPersonagem());
+		cliente.setClasse(menuClassePersonagem());
+		cliente.setSaldo(100.0);
+		cliente.geradorCRF();
 	}
 
-	private String menuRacaPersonagem() {
+	public String menuRacaPersonagem() {
 
 		String racaPersonagem = " ";
 		String condicao = " ";
@@ -131,27 +137,36 @@ public class Programa {
 				System.out.println("Anão***");
 				racaPersonagem = "Anão";
 				condicao = "0";
+				Artes.anao();
+				System.out.println(Artes.fraseAnao);
 				break;
 			case "2":
 				System.out.println("Elfo***");
 				racaPersonagem = "Elfo";
 				condicao = "0";
+				Artes.elfo();
+				System.out.println(Artes.fraseElfo);
 				break;
 			case "3":
 				System.out.println("Minotauro***");
 				racaPersonagem = "Minotauro";
 				condicao = "0";
-				minotauroArt();
+				Artes.minotauroArt();
+				System.out.println(Artes.fraseMinotauro);
 				break;
 			case "4":
 				System.out.println("Gnomo***");
 				racaPersonagem = "Gnomo";
 				condicao = "0";
+				Artes.gnomo();
+				System.out.println(Artes.fraseGnomo);
 				break;
 			case "5":
 				System.out.println("Goblin***");
 				racaPersonagem = "Goblin";
 				condicao = "0";
+				Artes.goblin();
+				System.out.println(Artes.fraseGoblin);
 				break;
 
 			default:
@@ -162,22 +177,66 @@ public class Programa {
 
 		return racaPersonagem;
 	}
+	
+	public void escolhaLoja(Cliente cliente) {
+		String condicao = " ";
+		System.out.println("Olá "+cliente.getRaca()+" meu nome é " + func.getNome() + ", o que posso fazer por você?");
+		do {
 
-	private void minotauroArt() {
-		System.out.println("<=======]}======\r\n"
-				+ "    --.   /|\r\n"
-				+ "   _\\\"/_.'/\r\n"
-				+ " .'._._,.'\r\n"
-				+ " :/ \\{}/\r\n"
-				+ "(L  /--',----._\r\n"
-				+ "    |          \\\\\r\n"
-				+ "   : /-\\ .'-'\\ / |\r\n"
-				+ "snd \\\\, ||    \\|\r\n"
-				+ "     \\/ ||    ||");
+			StringBuilder sb = new StringBuilder();
+			sb.append("\n  =========================");
+			sb.append("\n |                         |");
+			sb.append("\n |     1 - Loja de Poções  |");
+			sb.append("\n |     2 - Loja de Arco e Flecha  |");
+			sb.append("\n |     0 - Sair  |");
+			sb.append("\n  =========================");
+			sb.append("\nOpcão --> ");
+			System.out.println(sb);
+			
+			condicao = scan.next();
+
+			LojaPocao lojaPocao = new LojaPocao();
+			LojaArcoFlecha lojaArcoFlecha = new LojaArcoFlecha();
+			switch (condicao) {
+			case "1":
 		
-	}
+				lojaPocao.menuLoja(cliente);
+				
+				System.out.println("Loja de poções***");
+					for(int i=1; i<lojaPocao.lojaItensPocao.size(); i++) {
+						System.out.println(i+": "+lojaPocao.lojaItensPocao.get(i).getNome() + " R$" + lojaPocao.lojaItensPocao.get(i).getPreco());
+					}
 
-	private String menuClassepersonagem() {
+				lojaPocao.escolherIten(cliente);
+				escolhaLoja(cliente);
+				
+				condicao = "0";
+				break;
+				
+			case "2":
+				lojaArcoFlecha.menuLoja(cliente);
+				System.out.println("Loja de Arco e Flecha***");
+					for(int i=1; i<lojaArcoFlecha.lojaArcoFlecha.size(); i++) {
+						System.out.println(i+": "+lojaArcoFlecha.lojaArcoFlecha.get(i).getNome() + " R$" + lojaArcoFlecha.lojaArcoFlecha.get(i).getPreco());
+					}
+
+				lojaArcoFlecha.escolherIten(cliente);
+				escolhaLoja(cliente);
+				condicao = "0";
+				break;
+			case "0":
+				System.out.println("Saindo...");
+				condicao = "0";
+				break;
+			default:
+				System.out.println("Opção inválida! Tente novamente.");
+				break;
+			}
+		} while (!condicao.equals("0"));
+
+	}
+	
+	private String menuClassePersonagem() {
 
 		String classePersonagem = " ";
 		String condicao = " ";
@@ -190,7 +249,6 @@ public class Programa {
 			sb.append("\n |     3 - Mago        |");
 			sb.append("\n |     4 - Ladrão        |");
 			sb.append("\n |     5 - Curandeiro|");
-//			sb.append("\n |     0 - voltar|");
 			sb.append("\n  =========================");
 			sb.append("\n Opcão --> ");
 			System.out.println(sb);
@@ -222,10 +280,6 @@ public class Programa {
 				classePersonagem = "Curandeiro";
 				condicao = "0";
 				break;
-//			case "0":
-//				System.out.println("voltando***");
-//				condicao = "0";
-//				break;
 
 			default:
 				System.out.println("Opção inválida! Tente novamente.");
@@ -235,79 +289,25 @@ public class Programa {
 
 		return classePersonagem;
 	}
-
-	private void escolhaLoja() {
-		String condicao = " ";
-		do {
-
-			StringBuilder sb = new StringBuilder();
-			sb.append("\n  =========================");
-			sb.append("\n |                         |");
-			sb.append("\n |     1 - Loja de Poções         |");
-			sb.append("\n |     2 - Loja de Espadas           |");
-			sb.append("\n |     3 - Loja de Arco e Flechas        |");
-			sb.append("\n |     4 - Loja variedade        |");
-			sb.append("\n  =========================");
-			sb.append("\nOpcão --> ");
-			System.out.println(sb);
-			condicao = scan.next();
-
-			switch (condicao) {
-			case "1":
-				System.out.println("Loja de poções***");
-				Programa.loja = new LojaPocao();
-				condicao = "0";
-				break;
-			case "2":
-				System.out.println("Loja de Espadas***");
-				Programa.loja = new LojaEspada();
-				condicao = "0";
-				break;
-			case "3":
-				System.out.println("Loja de Arco e Flecha***");
-				Programa.loja = new LojaArco();
-				condicao = "0";
-				break;
-			case "4":
-				System.out.println("Loja variedades***");
-				Programa.loja = new LojaVariedades();
-				condicao = "0";
-				break;
-
-			default:
-				System.out.println("Opção inválida! Tente novamente.");
-				break;
-			}
-		} while (!condicao.equals("0"));
-
-	}
-
-	private static void infoCriadores() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Augusto");
-		sb.append("\nCamilla");
-		sb.append("\nEdgar");
-		sb.append("\nHenrique");
-		sb.append("\nJonathan");
-		sb.append("\nVitória");
-		System.out.println(sb);
-	}
-
-	public static void limpatela() {
-		System.out.println(
-				"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	}
-
+	
+	
+	
 	public static void fraseIntrodutoria() throws Exception {
-		String fraseInicial = "FRASE DE INTRODUÇÃO DE EXEMPLO DO RAGNAROK"
-				+ "\n Quando a pequena cidade de Edda, na Noruega, passa a sofrer com invernos muito quentes e"
-				+ "\n tempestades violentas, um grupo de amigos do ensino médio começa a achar que o Ragnarök,"
-				+ "\n sequência de eventos que levariam ao apocalipse de acordo com a mitologia nórdica,"
-				+ "\n está mais próximo do que eles imaginam.";
-		int pulaLinha = 10;
+		String fraseInicial = " Raftel, é uma ilha no final do Novo Mundo,\n"
+				+ " no qual supostamente é onde está o tesouro One Piece.\n"
+				+ " Foi nomeada pelo Gol D. Roger após o seu grupo chegar na ilha e descobrir o tesouro\n"
+				+ " deixado pelo grande Joyboy.\n"
+				+ " Fazendo com que vários mundos se juntasse a busca deste tesouro em Raftal,\n"
+				+ " desvendando seus enigmas até que alguém, consiga conquistar seu tesourou.";
 		for (int i = 0; i < fraseInicial.length(); i++) {
 			System.out.print(fraseInicial.charAt(i));
-			// Thread.sleep(5);//usar 5
+//			Thread.sleep(7);
 		}
 	}
+	
 }
+
+
+	
+	
+	
